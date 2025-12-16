@@ -1,18 +1,30 @@
 from modelo_vehiculo_Minivan import ModeloVehiculoMinivan
 from modelo_vehiculo_Deportivo import ModeloVehiculoDeportivo
 from modelo_vehiculo_TipoPesado import ModeloVehiculoTipoPesado
+from base_datos_vehiculos import BaseDatosVehiculos
+from modelo_vechiculos import Vehiculos
 
-# Instancia Minivan
-obj_minivan = ModeloVehiculoMinivan("Honda Odyssey", "V6", "Plateado", "Gasolina", 4, 7)
-print(obj_minivan.imprimir_info())
-print("-----")
+if __name__ == "__main__":
+    bd = BaseDatosVehiculos()
 
-# Instancia Deportivo
-obj_deportivo = ModeloVehiculoDeportivo("Ferrari", "V8Turbo", "Amarillo", "GasolinaPremium", "Superdeportivo", 340)
-print(obj_deportivo.imprimir_info())
-print("-----")
+    v1 = Vehiculos("Toyota", "V8", "Gris", "Gasolina")
+    v2 = ModeloVehiculoDeportivo("Ferrari", "V8 Turbo", "Rojo", "Gasolina", "Superdeportivo", 340)
+    v3 = ModeloVehiculoMinivan("Honda Odyssey", "V6", "Blanco", "Gasolina", 7, 4)
+    v4 = ModeloVehiculoTipoPesado("Volvo FH16", "D16", "Amarillo", "Diesel", 25, "Carga pesada")
 
-# Instancia Tipo Pesado
-obj_tipo_pesado = ModeloVehiculoTipoPesado("Volvo FH16", "D16", "Blanco", "Diesel", 25, "Carga pesada")
-print(obj_tipo_pesado.imprimir_info())
-print("-----")
+    print(bd.guardar_vehiculo(v1))
+    print(bd.guardar_vehiculo(v2))
+    print(bd.guardar_vehiculo(v3))
+    print(bd.guardar_vehiculo(v4))
+
+    print("\n--- VEHÍCULOS DEPORTIVOS ---")
+    for v in bd.listar_deportivos():
+        v.imprimir_info()
+
+    print("\n--- VEHÍCULOS MINIVAN ---")
+    for v in bd.listar_minivan():
+        v.imprimir_info()
+
+    print("\n--- VEHÍCULOS PESADOS ---")
+    for v in bd.listar_tipo_pesado():
+        v.imprimir_info()
